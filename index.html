@@ -121,7 +121,7 @@ nav.scrolled{background:rgba(10,10,15,.92);backdrop-filter:blur(20px);-webkit-ba
 .blur-in{animation:blurIn .9s cubic-bezier(.22,1,.36,1) both}
 .bi1{animation-delay:.1s}.bi2{animation-delay:.25s}.bi3{animation-delay:.4s}.bi4{animation-delay:.55s}.bi5{animation-delay:.7s}
 
-.hero-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(68px,9.5vw,138px);font-weight:400;letter-spacing:-.03em;line-height:.93;color:var(--text-primary);margin:24px 0 32px}
+.hero-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,9.5vw,138px);font-weight:400;letter-spacing:-.03em;line-height:.93;color:var(--text-primary);margin:24px 0 32px}
 .hero-headline em{font-style:italic;color:var(--accent)}
 .hero-sub{font-size:18px;font-weight:300;color:var(--text-secondary);max-width:540px;margin:0 auto 48px;line-height:1.75}
 .hero-ctas{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin-bottom:72px}
@@ -278,6 +278,20 @@ footer{border-top:1px solid var(--border);padding:72px 48px 40px;max-width:1240p
 .theme-tog:hover{color:var(--text-primary)}
 .theme-tog svg{display:block;transition:transform .4s cubic-bezier(.22,1,.36,1)}
 
+/* HAMBURGER / MOBILE NAV */
+.ham-btn{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;width:36px;height:36px;border-radius:6px;color:var(--text-primary)}
+.ham-btn span{display:block;width:22px;height:1.5px;background:currentColor;border-radius:2px;transition:transform .3s cubic-bezier(.22,1,.36,1),opacity .2s}
+.ham-btn.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.ham-btn.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.ham-btn.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.mobile-menu{display:none;position:fixed;top:72px;left:0;right:0;z-index:199;background:rgba(10,10,15,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:24px 24px 28px;flex-direction:column;gap:4px;transform:translateY(-8px);opacity:0;transition:transform .3s cubic-bezier(.22,1,.36,1),opacity .25s}
+.mobile-menu.open{transform:translateY(0);opacity:1}
+[data-theme="light"] .mobile-menu{background:rgba(245,240,232,.97)}
+.mobile-menu a{font-size:16px;color:var(--text-secondary);text-decoration:none;padding:12px 8px;border-radius:6px;display:block;transition:color .2s,background .2s}
+.mobile-menu a:hover{color:var(--text-primary);background:var(--border)}
+.mobile-menu .mob-cta{margin-top:12px;display:block;text-align:center;font-family:'Outfit',sans-serif;font-size:15px;font-weight:500;color:var(--bg-primary);background:var(--accent);padding:13px 24px;border-radius:6px;text-decoration:none;transition:opacity .2s}
+.mobile-menu .mob-cta:hover{opacity:.85;background:var(--accent)}
+
 /* RESPONSIVE */
 /* ELEGANT SHAPES — hero bg (ElegantShape port) */
 
@@ -316,19 +330,69 @@ footer{border-top:1px solid var(--border);padding:72px 48px 40px;max-width:1240p
 .btn-liquid span{position:relative;z-index:2}
 
 @media(max-width:900px){
-  nav{padding:0 24px}
+  nav{padding:0 20px}
   .nav-links{display:none}
-  .sec{padding:80px 24px}
-  .editorial-grid{grid-template-columns:1fr;gap:48px}
+  .nav-book-cta{display:none!important}
+  .ham-btn{display:flex}
+  .mobile-menu{display:flex}
+  .sec{padding:72px 20px}
+  .editorial-grid{grid-template-columns:1fr;gap:40px}
   .process-grid{grid-template-columns:1fr}
   .svc-grid{grid-template-columns:1fr}
   .results-grid{grid-template-columns:1fr}
   .test-grid{grid-template-columns:1fr}
-  #testimonials .sec > div{grid-template-columns:1fr}
-  .shuffle-scene{margin:0 auto}
-  .hero-stats{flex-direction:column;gap:0}
-  .hero-stat-sep{width:60px;height:1px}
+  /* hero stats: 2-column grid on mobile */
+  .hero-stats{display:grid!important;grid-template-columns:1fr 1fr;gap:0}
+  .hero-stat-sep{display:none}
+  .hero-stat{padding:18px 16px;border:1px solid rgba(255,255,255,.07)}
   .footer-top{flex-direction:column}
+  /* override inline grid styles */
+  .mob-grid-2{grid-template-columns:1fr!important;gap:40px!important}
+  .mob-grid-4{grid-template-columns:1fr!important;border-radius:12px!important}
+  /* shuffle scene */
+  .shuffle-wrap,.shuffle-scene{width:100%!important;max-width:300px!important;margin:0 auto!important}
+  .s-card{width:100%!important;max-width:300px!important}
+  #testimonials .sec{overflow:hidden}
+  /* cta */
+  .cta-inner{padding:80px 24px!important}
+  /* hero */
+  .hero-content{padding:100px 20px 48px!important}
+  #hero{align-items:flex-start!important;min-height:auto!important}
+}
+@media(max-width:640px){
+  .hero-headline{font-size:clamp(44px,11vw,68px)!important}
+  .hero-sub{font-size:15px!important;margin-bottom:32px!important}
+  .hero-ctas{gap:10px!important;margin-bottom:48px!important}
+  .btn-primary,.btn-ghost{padding:13px 22px!important;font-size:13px!important}
+  .hero-stat{padding:14px 12px!important}
+  .hero-stat-num{font-size:26px!important}
+  .hero-stat-label{font-size:10px!important}
+  .sec{padding:60px 18px}
+  /* full-service section */
+  .mob-section-pad{padding:72px 0 80px!important}
+  .mob-section-pad .sec{padding:0 18px!important}
+  /* card internal padding */
+  .mob-card-pad{padding:32px 22px!important}
+  /* stat blocks */
+  .stat-grid{grid-template-columns:1fr 1fr}
+  .stat-number{font-size:36px!important}
+  /* svc/proc cards */
+  .svc-card,.proc-card{padding:32px 24px!important}
+  .res-card{padding:28px 20px!important}
+  .res-metric{font-size:46px!important}
+  /* testimonials */
+  .shuffle-wrap,.shuffle-scene{max-width:270px!important}
+  .s-card{max-width:270px!important;padding:28px 22px!important}
+  .s-card-quote{font-size:16px!important}
+  /* footer */
+  footer{padding:56px 20px 32px!important}
+  .footer-nav-row{gap:40px!important}
+  .footer-bottom{flex-direction:column;align-items:center;text-align:center;gap:8px}
+  /* cta section */
+  .cta-inner{padding:64px 20px!important}
+  .cta-heading{font-size:clamp(36px,10vw,56px)!important}
+  /* reduce process card huge bg number */
+  .proc-num{font-size:60px!important;top:-8px!important}
 }
 @media(prefers-reduced-motion:reduce){
   .blur-in,.sr{animation:none!important;opacity:1!important;transform:none!important}
@@ -348,6 +412,9 @@ footer{border-top:1px solid var(--border);padding:72px 48px 40px;max-width:1240p
     <li><a href="#results">Results</a></li>
     <li><a href="#testimonials">Testimonials</a></li>
   </ul>
+  <button class="ham-btn" id="ham-btn" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
   <div style="display:flex;align-items:center;gap:8px">
     <button class="theme-tog" id="theme-tog" aria-label="Toggle theme">
       <svg id="tog-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="overflow:visible">
@@ -361,13 +428,22 @@ footer{border-top:1px solid var(--border);padding:72px 48px 40px;max-width:1240p
         </g>
       </svg>
     </button>
-    <a href="#cta" class="btn-liquid" role="button" style="font-size:12px;padding:8px 18px;border-radius:5px">
+    <a href="#cta" class="btn-liquid nav-book-cta" role="button" style="font-size:12px;padding:8px 18px;border-radius:5px">
       <div class="btn-liquid-filter"></div>
       <div class="btn-liquid-shine"></div>
       <span>Book a Call →</span>
     </a>
   </div>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <a href="#how" onclick="closeMobileMenu()">How It Works</a>
+  <a href="#services" onclick="closeMobileMenu()">Services</a>
+  <a href="#results" onclick="closeMobileMenu()">Results</a>
+  <a href="#testimonials" onclick="closeMobileMenu()">Testimonials</a>
+  <a href="#cta" class="mob-cta" onclick="closeMobileMenu()">Book a Call →</a>
+</div>
 
 <!-- GOOEY TEXT FILTER -->
 <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
@@ -454,7 +530,7 @@ footer{border-top:1px solid var(--border);padding:72px 48px 40px;max-width:1240p
 </div>
 
 <!-- FULL SERVICE SECTION -->
-<section style="background:var(--bg-primary);position:relative;overflow:hidden;padding:120px 0 140px">
+<section class="mob-section-pad" style="background:var(--bg-primary);position:relative;overflow:hidden;padding:120px 0 140px">
   <div style="position:absolute;inset:0;pointer-events:none">
     <div style="position:absolute;top:-100px;left:-200px;width:700px;height:700px;background:radial-gradient(ellipse,rgba(0,194,255,.04),transparent 65%);border-radius:50%"></div>
     <div style="position:absolute;bottom:-60px;right:-100px;width:500px;height:500px;background:radial-gradient(ellipse,rgba(0,194,255,.03),transparent 65%);border-radius:50%"></div>
@@ -462,7 +538,7 @@ footer{border-top:1px solid var(--border);padding:72px 48px 40px;max-width:1240p
   <div class="sec" style="position:relative;z-index:1">
 
     <!-- Top: editorial heading -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:80px">
+    <div class="mob-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end;margin-bottom:80px">
       <div>
         <p class="accent-line sr">Full-Service Delivery</p>
         <h2 class="dh sr d1" style="font-size:clamp(46px,5.5vw,80px);line-height:1.02;margin:20px 0 0">We handle<br>everything.<br><em style="color:var(--accent)">You just close.</em></h2>
@@ -487,10 +563,10 @@ footer{border-top:1px solid var(--border);padding:72px 48px 40px;max-width:1240p
     </div>
 
     <!-- Deliverable cards 2×2 -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;border:1px solid var(--border);border-radius:16px;overflow:hidden">
+    <div class="mob-grid-4" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;border:1px solid var(--border);border-radius:16px;overflow:hidden">
 
       <!-- Card 1 -->
-      <div class="sr" style="padding:52px 48px;background:var(--bg-card);position:relative;overflow:hidden;border-right:1px solid var(--border);border-bottom:1px solid var(--border)">
+      <div class="sr mob-card-pad" style="padding:52px 48px;background:var(--bg-card);position:relative;overflow:hidden;border-right:1px solid var(--border);border-bottom:1px solid var(--border)">
         <div style="position:absolute;top:0;right:0;width:180px;height:180px;background:radial-gradient(ellipse at top right,rgba(0,194,255,.07),transparent 65%);pointer-events:none"></div>
         <div style="width:44px;height:44px;border-radius:10px;background:var(--accent-glow);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;margin-bottom:28px">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round">
@@ -507,7 +583,7 @@ footer{border-top:1px solid var(--border);padding:72px 48px 40px;max-width:1240p
       </div>
 
       <!-- Card 2 -->
-      <div class="sr d1" style="padding:52px 48px;background:var(--bg-card);position:relative;overflow:hidden;border-bottom:1px solid var(--border)">
+      <div class="sr d1 mob-card-pad" style="padding:52px 48px;background:var(--bg-card);position:relative;overflow:hidden;border-bottom:1px solid var(--border)">
         <div style="position:absolute;top:0;left:0;width:180px;height:180px;background:radial-gradient(ellipse at top left,rgba(0,194,255,.06),transparent 65%);pointer-events:none"></div>
         <div style="width:44px;height:44px;border-radius:10px;background:var(--accent-glow);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;margin-bottom:28px">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round">
@@ -524,7 +600,7 @@ footer{border-top:1px solid var(--border);padding:72px 48px 40px;max-width:1240p
       </div>
 
       <!-- Card 3 -->
-      <div class="sr d2" style="padding:52px 48px;background:var(--bg-card);position:relative;overflow:hidden;border-right:1px solid var(--border)">
+      <div class="sr d2 mob-card-pad" style="padding:52px 48px;background:var(--bg-card);position:relative;overflow:hidden;border-right:1px solid var(--border)">
         <div style="position:absolute;bottom:0;right:0;width:180px;height:180px;background:radial-gradient(ellipse at bottom right,rgba(0,194,255,.06),transparent 65%);pointer-events:none"></div>
         <div style="width:44px;height:44px;border-radius:10px;background:var(--accent-glow);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;margin-bottom:28px">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round">
@@ -541,7 +617,7 @@ footer{border-top:1px solid var(--border);padding:72px 48px 40px;max-width:1240p
       </div>
 
       <!-- Card 4 -->
-      <div class="sr d3" style="padding:52px 48px;background:var(--bg-card);position:relative;overflow:hidden">
+      <div class="sr d3 mob-card-pad" style="padding:52px 48px;background:var(--bg-card);position:relative;overflow:hidden">
         <div style="position:absolute;bottom:0;left:0;width:180px;height:180px;background:radial-gradient(ellipse at bottom left,rgba(0,194,255,.06),transparent 65%);pointer-events:none"></div>
         <div style="width:44px;height:44px;border-radius:10px;background:var(--accent-glow);border:1px solid var(--accent-border);display:flex;align-items:center;justify-content:center;margin-bottom:28px">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round">
@@ -709,7 +785,7 @@ footer{border-top:1px solid var(--border);padding:72px 48px 40px;max-width:1240p
 <section id="testimonials" style="background:var(--bg-primary);position:relative;overflow:hidden">
   <div class="sec-orb" style="width:500px;height:250px;background:radial-gradient(ellipse,rgba(0,255,212,.04),transparent 70%);top:20%;right:5%;--dur:25s;--d:-12s"></div>
   <div class="sec">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
+    <div class="mob-grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center">
       <div>
         <p class="al-c sr">What Clients Say</p>
         <h2 class="dh sr d1" style="font-size:clamp(42px,5vw,70px);max-width:440px;margin-bottom:24px">In their<br>own words.</h2>
@@ -780,6 +856,28 @@ const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
   nav.classList.toggle('scrolled', window.scrollY > 20);
 }, { passive: true });
+
+// HAMBURGER MENU
+const hamBtn = document.getElementById('ham-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+function closeMobileMenu() {
+  hamBtn.classList.remove('open');
+  hamBtn.setAttribute('aria-expanded','false');
+  mobileMenu.classList.remove('open');
+  mobileMenu.setAttribute('aria-hidden','true');
+}
+hamBtn && hamBtn.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.toggle('open');
+  hamBtn.classList.toggle('open', isOpen);
+  hamBtn.setAttribute('aria-expanded', String(isOpen));
+  mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+});
+// close on outside click
+document.addEventListener('click', e => {
+  if (mobileMenu && mobileMenu.classList.contains('open') && !nav.contains(e.target) && !mobileMenu.contains(e.target)) {
+    closeMobileMenu();
+  }
+});
 
 // (Particles replaced by aurora CSS animation)
 
@@ -853,11 +951,14 @@ document.querySelectorAll('.sr').forEach(el => io.observe(el));
   let positions = ['front','middle','back','hidden'];
 
   function posStyle(pos, i) {
+    const isMobile = window.innerWidth < 640;
+    const mid = isMobile ? '10%' : '33%';
+    const back = isMobile ? '20%' : '66%';
     const transforms = {
       front:  'rotate(-6deg) translateX(0%)',
-      middle: 'rotate(0deg)  translateX(33%)',
-      back:   'rotate(6deg)  translateX(66%)',
-      hidden: 'rotate(6deg)  translateX(66%)',
+      middle: `rotate(0deg)  translateX(${mid})`,
+      back:   `rotate(6deg)  translateX(${back})`,
+      hidden: `rotate(6deg)  translateX(${back})`,
     };
     const zMap = { front:3, middle:2, back:1, hidden:0 };
     return { transform: transforms[pos], zIndex: zMap[pos], opacity: pos === 'hidden' ? 0 : 1 };
@@ -918,7 +1019,7 @@ document.querySelectorAll('.sr').forEach(el => io.observe(el));
     const front = getFront();
     front.style.transition = '';
     const dx = (e.changedTouches ? e.changedTouches[0] : e).clientX - dragStartX;
-    if (dx < -120) {
+    if (Math.abs(dx) > 80) {
       shuffle();
     } else {
       front.style.transform = 'rotate(-6deg) translateX(0%)';
